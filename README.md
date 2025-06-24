@@ -1,6 +1,6 @@
 # 📊 Smart Investment Portfolio Dashboard — Power BI | Python | Excel
 
-![Investment Dashboard](./Screenshot_2025-05-28_111930.jpg)
+![Investment Dashboard](https://github.com/OkaforChukwuka/Smart-Investment-Portfolio-Dashboard-python-excel-powerbi/blob/main/Screenshot%202025-05-28%20112217.jpg?raw=true)
 
 ## 📌 Overview
 This financial dashboard visualizes and monitors the performance of an investment portfolio comprising popular ETFs such as SPY, QQQ, GLD, and ARKK. The project uses Python for financial data ingestion, Excel for initial structuring, and Power BI for dashboard presentation and insights delivery.
