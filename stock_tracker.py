@@ -10,11 +10,12 @@ from datetime import datetime, timedelta
 import os
 import json
 from typing import Dict, List, Tuple
+from config import Config
 
 class StockTracker:
     def __init__(self, symbols: List[str] = None):
-        """Initialize the Stock Tracker with ETF symbols"""
-        self.symbols = symbols or ['SPY', 'QQQ', 'GLD', 'ARKK', 'TLT']
+        """Initialize the Stock Tracker with all configured symbols (ETFs + Individual Stocks)"""
+        self.symbols = symbols or Config.DEFAULT_SYMBOLS
         self.data_folder = os.path.dirname(os.path.abspath(__file__))
         
     def fetch_current_data(self, period: str = "1y") -> Dict[str, pd.DataFrame]:
@@ -224,8 +225,8 @@ class StockTracker:
 
 def main():
     """Main execution function"""
-    # Initialize tracker with your ETF symbols
-    tracker = StockTracker(['SPY', 'QQQ', 'GLD', 'ARKK', 'TLT'])
+    # Initialize tracker with all configured symbols (ETFs + Stocks)
+    tracker = StockTracker()  # Uses Config.DEFAULT_SYMBOLS
     
     # Run the update
     success = tracker.run_update()

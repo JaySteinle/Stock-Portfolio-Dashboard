@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import numpy as np
 import os
 from stock_tracker import StockTracker
+from config import Config
 
 # Configure Streamlit page
 st.set_page_config(
@@ -21,6 +22,32 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Custom CSS for expanded multiselect dropdown and sidebar
+st.markdown("""
+    <style>
+    /* Expand multiselect dropdown height for better visibility of all symbols */
+    .stMultiSelect > div > div > div {
+        max-height: 400px !important;
+    }
+    
+    /* Expand sidebar width slightly for better symbol display */
+    .css-1d391kg {
+        width: 350px;
+    }
+    
+    /* Better styling for sidebar info boxes */
+    .stSidebar .stInfo {
+        font-size: 0.9em;
+        margin: 0.5em 0;
+    }
+    
+    /* Improve multiselect button spacing */
+    .stMultiSelect .css-1wa3eu0-placeholder {
+        font-size: 0.9em;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 def load_portfolio_data():
     """Load portfolio data from Excel files"""
@@ -66,7 +93,7 @@ def create_price_chart(data, symbols):
         title="Stock Price Trends",
         xaxis_title="Date",
         yaxis_title="Price ($)",
-        height=400,
+        height=500,  # Increased height for better visibility of 10 stocks
         hovermode='x unified',
         showlegend=True
     )
@@ -93,7 +120,7 @@ def create_returns_chart(data, symbols):
         title="Cumulative Returns (%)",
         xaxis_title="Date",
         yaxis_title="Cumulative Return (%)",
-        height=400,
+        height=500,  # Increased height for better visibility of 10 stocks
         hovermode='x unified',
         showlegend=True
     )
@@ -156,12 +183,12 @@ def main():
     # Update data button
     if st.sidebar.button("🔄 Update Stock Data", type="primary"):
         with st.spinner("Fetching latest stock data..."):
-            tracker = StockTracker(['SPY', 'QQQ', 'GLD', 'ARKK', 'TLT'])
+            tracker = StockTracker()  # Use default symbols from config
             success = tracker.run_update()
             
             if success:
                 st.sidebar.success("✅ Data updated successfully!")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.sidebar.error("❌ Failed to update data")
     
@@ -173,13 +200,31 @@ def main():
         st.warning("⚠️ No portfolio data found. Please click 'Update Stock Data' to fetch the latest information.")
         return
     
-    # Symbol selector
+    # Symbol selector - Expanded height for better visibility of all stocks
     available_symbols = portfolio_data['Symbol'].unique().tolist() if not portfolio_data.empty else []
     selected_symbols = st.sidebar.multiselect(
-        "📈 Select ETFs to Display",
+        "📈 Select Stocks & ETFs to Display",
         options=available_symbols,
-        default=available_symbols
+        default=available_symbols,
+        help="Choose which stocks and ETFs to display in the charts below",
+        # Use container styling for expanded height
     )
+    
+    # Display selection summary in sidebar
+    if available_symbols:
+        st.sidebar.info(f"📊 Tracking {len(available_symbols)} total symbols | Selected: {len(selected_symbols)}")
+        
+        # Show categorized symbols in sidebar for easy reference
+        if available_symbols:
+            etfs = [s for s in available_symbols if s in Config.ETF_SYMBOLS]
+            stocks = [s for s in available_symbols if s not in Config.ETF_SYMBOLS]
+            
+            if etfs:
+                st.sidebar.markdown("**📊 ETFs:**")
+                st.sidebar.markdown(" • ".join(etfs))
+            if stocks:
+                st.sidebar.markdown("**🏢 Individual Stocks:**")
+                st.sidebar.markdown(" • ".join(stocks))
     
     if not selected_symbols:
         st.warning("Please select at least one ETF symbol from the sidebar.")
@@ -216,17 +261,17 @@ def main():
         # Price trends
         st.subheader("📈 Stock Price Trends")
         price_chart = create_price_chart(filtered_historical, selected_symbols)
-        st.plotly_chart(price_chart, use_container_width=True)
+        st.plotly_chart(price_chart, width='stretch')
         
         # Returns
         st.subheader("💹 Cumulative Returns")
         returns_chart = create_returns_chart(filtered_historical, selected_symbols)
-        st.plotly_chart(returns_chart, use_container_width=True)
+        st.plotly_chart(returns_chart, width='stretch')
         
         # Volume (collapsible)
         with st.expander("📊 Trading Volume Analysis"):
             volume_chart = create_volume_chart(filtered_historical, selected_symbols)
-            st.plotly_chart(volume_chart, use_container_width=True)
+            st.plotly_chart(volume_chart, width='stretch')
     
     # Performance table
     st.subheader("📋 Current Performance Metrics")
@@ -235,7 +280,8 @@ def main():
     if not performance_table.empty:
         st.dataframe(
             performance_table[['Symbol', 'Current_Price', 'Daily_Return_Pct', 'Cumulative_Return_Pct', 'Volume']],
-            use_container_width=True
+            width='stretch',
+            height=400  # Expanded height to show more stocks comfortably
         )
     
     # Additional insights

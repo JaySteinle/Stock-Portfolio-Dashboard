@@ -8,8 +8,28 @@ from typing import List, Dict
 class Config:
     """Configuration class for stock tracker settings"""
     
-    # Default ETF symbols to track
-    DEFAULT_SYMBOLS: List[str] = ['SPY', 'QQQ', 'GLD', 'ARKK', 'TLT']
+    # ETF symbols (Exchange Traded Funds)
+    ETF_SYMBOLS: List[str] = [
+        'SPY',   # S&P 500 ETF
+        'QQQ',   # NASDAQ 100 ETF
+        'GLD',   # Gold ETF
+        'ARKK',  # Innovation ETF
+        'TLT',   # Long-term Treasury ETF
+        'VPU',   # Utilities ETF
+        'FXU',   # International ETF
+    ]
+    
+    # Individual stock symbols
+    STOCK_SYMBOLS: List[str] = [
+        'AAPL',  # Apple
+        'GOOGL', # Google/Alphabet
+        'MSFT',  # Microsoft
+        'TSLA',  # Tesla
+        'NVDA'   # NVIDIA
+    ]
+    
+    # Combined default symbols to track (ETFs + Individual Stocks)
+    DEFAULT_SYMBOLS: List[str] = ETF_SYMBOLS + STOCK_SYMBOLS
     
     # Data fetching settings
     DEFAULT_PERIOD: str = "1y"  # 1 year of historical data
@@ -28,13 +48,21 @@ class Config:
     MA_SHORT_PERIOD: int = 20
     MA_LONG_PERIOD: int = 50
     
-    # Portfolio allocation weights (equal weight by default)
+    # Portfolio allocation weights (customize as needed)
     PORTFOLIO_WEIGHTS: Dict[str, float] = {
-        'SPY': 0.25,   # S&P 500
-        'QQQ': 0.25,   # NASDAQ 100
-        'GLD': 0.20,   # Gold
-        'ARKK': 0.15,  # Innovation ETF
-        'TLT': 0.15    # Long-term Treasury
+        # ETFs - 50% allocation
+        'SPY': 0.15,   # S&P 500
+        'QQQ': 0.15,   # NASDAQ 100
+        'GLD': 0.10,   # Gold
+        'ARKK': 0.05,  # Innovation ETF
+        'TLT': 0.05,   # Long-term Treasury
+        
+        # Individual Stocks - 50% allocation
+        'AAPL': 0.12,  # Apple
+        'GOOGL': 0.12, # Google/Alphabet
+        'MSFT': 0.12,  # Microsoft
+        'TSLA': 0.08,  # Tesla
+        'NVDA': 0.06   # NVIDIA
     }
     
     # Streamlit dashboard settings
