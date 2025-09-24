@@ -47,6 +47,95 @@ To create a smart dashboard for investment analysis, helping investors and analy
 - Time-series transformation and structuring in Excel
 - Building dynamic, real-time dashboards in Power BI
 - Investment KPIs, portfolio optimization visualization
+- Interactive web dashboards with Streamlit
+- Automated data pipelines and scheduling
+- Real-time stock data integration
+
+---
+
+## 🚀 New Interactive Features
+
+### 📊 Real-Time Stock Tracker (`stock_tracker.py`)
+- **Automated Data Fetching**: Pulls live data from Yahoo Finance
+- **Excel Integration**: Updates your existing Excel files with new data
+- **Performance Metrics**: Calculates Sharpe ratio, max drawdown, volatility
+- **Power BI Ready**: Exports consolidated data for Power BI consumption
+
+### 🌐 Interactive Web Dashboard (`dashboard.py`)
+- **Live Charts**: Interactive price trends and returns visualization
+- **Real-Time Metrics**: Current performance indicators
+- **Portfolio Insights**: Top gainers/losers analysis
+- **Responsive Design**: Works on desktop and mobile
+
+### ⏰ Automated Scheduler (`scheduler.py`)
+- **Flexible Timing**: 15min, 30min, hourly, or daily updates
+- **Background Processing**: Runs continuously in the background
+- **Logging**: Comprehensive activity tracking
+- **Error Handling**: Robust failure recovery
+
+---
+
+## 📋 Quick Setup
+
+### Prerequisites
+- Python 3.8+ installed
+- Internet connection for data fetching
+
+### 🚀 One-Click Setup
+1. **Run the setup script**:
+   ```bash
+   setup.bat
+   ```
+   This will:
+   - Install all required packages
+   - Fetch initial stock data  
+   - Launch the interactive dashboard
+
+### 🔧 Manual Setup
+1. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Fetch initial data**:
+   ```bash
+   python stock_tracker.py
+   ```
+
+3. **Launch dashboard**:
+   ```bash
+   streamlit run dashboard.py
+   ```
+
+4. **Start automated updates** (optional):
+   ```bash
+   python scheduler.py
+   ```
+
+---
+
+## 📁 Project Structure
+
+```
+📂 Smart-Investment-Portfolio-Dashboard/
+├── 📊 Excel Files/
+│   ├── SPY.xlsx (Updated with live data)
+│   ├── QQQ.xlsx (Updated with live data) 
+│   ├── GLD.xlsx (Updated with live data)
+│   ├── ARKK.xlsx (Updated with live data)
+│   ├── TLT.xlsx (Updated with live data)
+│   ├── Portfolio_Summary.xlsx (New)
+│   └── Consolidated_Historical_Data.xlsx (New)
+├── 🐍 Python Components/
+│   ├── stock_tracker.py (Data fetching & Excel updates)
+│   ├── dashboard.py (Interactive web interface)
+│   ├── scheduler.py (Automated updates)
+│   └── config.py (Configuration settings)
+├── 📊 Power BI/
+│   └── Investment Portfolio.pbix (Your existing dashboard)
+└── 🔧 Setup/
+    ├── requirements.txt (Python dependencies)
+    └── setup.bat (One-click setup)
 
 ---
 
