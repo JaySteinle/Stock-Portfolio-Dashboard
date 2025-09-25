@@ -7,53 +7,25 @@ from typing import List, Dict
 
 class Config:
     """Configuration class for stock tracker settings"""
+    
+    # ETF symbols (Exchange Traded Funds)
     ETF_SYMBOLS: List[str] = [
-    # Energy & Commodities
-    'URA',   # Global X Uranium ETF
-    'AMZA',  # InfraCap MLP ETF
-    'URNM',  # North Shore Global Uranium Mining ETF
-    'FCG',  # FT Natural Gas ETF
-    'PXE',  # Invesco Energy Exploration & Production ETF
-        
-    #Technology
-    'SMH',  # VanEck Semiconductor ETF
-    'ETEC', # iShares Breakthrough Environmental Solutions ETF
-        
-    # Industrials & Materials
-    'XME',  # SPDR Metals & Mining ETF
-    'AIRR', # FT RBA American Industrial Renaissance ETF
-
-    #Income & Infrastructure
-    'ATMP', # iPath MLP ETN
-    'MLPX', # Global X MLP & Energy Infrastructure ETF
+        'SPY',   # S&P 500 ETF
+        'QQQ',   # NASDAQ 100 ETF
+        'GLD',   # Gold ETF
+        'ARKK',  # Innovation ETF
+        'TLT',   # Long-term Treasury ETF
+        'VPU',   # Utilities ETF
+        'FXU',   # International ETF
     ]
-
-    # Individual Stocks - 50% allocation
-    # 'AAPL': 0.12,  # Apple
-    # 'GOOGL': 0.12, # Google/Alphabet
-    # 'MSFT': 0.12,  # Microsoft
-    # 'TSLA': 0.08,  # Tesla
-    # 'NVDA': 0.06   # NVIDIA
     
-
-    # # ETF symbols (Exchange Traded Funds)
-    # ETF_SYMBOLS: List[str] = [
-    #     'SPY',   # S&P 500 ETF
-    #     'QQQ',   # NASDAQ 100 ETF
-    #     'GLD',   # Gold ETF
-    #     'ARKK',  # Innovation ETF
-    #     'TLT',   # Long-term Treasury ETF
-    #     'VPU',   # Utilities ETF
-    #     'FXU',   # International ETF
-    # ]
-    
-    # # Individual stock symbols
+    # Individual stock symbols
     STOCK_SYMBOLS: List[str] = [
-    #     'AAPL',  # Apple
-    #     'GOOGL', # Google/Alphabet
-    #     'MSFT',  # Microsoft
-    #     'TSLA',  # Tesla
-    #     'NVDA'   # NVIDIA
+        'AAPL',  # Apple
+        'GOOGL', # Google/Alphabet
+        'MSFT',  # Microsoft
+        'TSLA',  # Tesla
+        'NVDA'   # NVIDIA
     ]
     
     # Combined default symbols to track (ETFs + Individual Stocks)
@@ -76,51 +48,21 @@ class Config:
     MA_SHORT_PERIOD: int = 20
     MA_LONG_PERIOD: int = 50
     
-    # # Portfolio allocation weights (customize as needed)
-    # PORTFOLIO_WEIGHTS: Dict[str, float] = {
-    #     # ETFs - 50% allocation
-    #     'SPY': 0.15,   # S&P 500
-    #     'QQQ': 0.15,   # NASDAQ 100
-    #     'GLD': 0.10,   # Gold
-    #     'ARKK': 0.05,  # Innovation ETF
-    #     'TLT': 0.05,   # Long-term Treasury
-        
-    #     # Individual Stocks - 50% allocation
-    #     'AAPL': 0.12,  # Apple
-    #     'GOOGL': 0.12, # Google/Alphabet
-    #     'MSFT': 0.12,  # Microsoft
-    #     'TSLA': 0.08,  # Tesla
-    #     'NVDA': 0.06   # NVIDIA
-    # }
-
     # Portfolio allocation weights (customize as needed)
     PORTFOLIO_WEIGHTS: Dict[str, float] = {
         # ETFs - 50% allocation
-        # Energy & Commodies
-        'URA': 0.15,   # Global X Uranium ETF
-        'AMZA': 0.15,  # InfraCap MLP ETF
-        'URNM': 0.10,  # North Shore Global Uranium Mining ETF
-        'FCG': 0.05,   # FT Natural Gas ETF
-        ' PXE': 0.05,   # Invesco Energy Exploration & Production ETF
+        'SPY': 0.15,   # S&P 500
+        'QQQ': 0.15,   # NASDAQ 100
+        'GLD': 0.10,   # Gold
+        'ARKK': 0.05,  # Innovation ETF
+        'TLT': 0.05,   # Long-term Treasury
         
-        #Technology
-        'SMH': 0.15,  # VanEck Semiconductor ETF
-        'ETEC': 0.10, # iShares Breakthrough Environmental Solutions ETF
-        
-        # Industrials & Materials
-        'XME': 0.10,  # SPDR Metals & Mining ETF
-        'AIRR': 0.05, # FT RBA American Industrial Renaissance ETF
-
-        #Income & Infrastructure
-        'ATMP': 0.05, # iPath MLP ETN
-        'MLPX': 0.05, # Global X MLP & Energy Infrastructure ETF
-
         # Individual Stocks - 50% allocation
-        # 'AAPL': 0.12,  # Apple
-        # 'GOOGL': 0.12, # Google/Alphabet
-        # 'MSFT': 0.12,  # Microsoft
-        # 'TSLA': 0.08,  # Tesla
-        # 'NVDA': 0.06   # NVIDIA
+        'AAPL': 0.12,  # Apple
+        'GOOGL': 0.12, # Google/Alphabet
+        'MSFT': 0.12,  # Microsoft
+        'TSLA': 0.08,  # Tesla
+        'NVDA': 0.06   # NVIDIA
     }
     
     # Streamlit dashboard settings
